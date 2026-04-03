@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IdIdentifyApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "IdIdentifyApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

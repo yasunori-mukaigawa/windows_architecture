@@ -1,0 +1,13 @@
+<Page
+    x:Class="IdIdentifyApp.Feature.Check.Ui.Views.CheckPage2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel Spacing="12" Padding="24">
+        <TextBlock Text="{Binding State.Title}" FontSize="28" />
+        <TextBlock Text="{Binding State.StatusMessage}" FontSize="18" />
+
+        <Button Content="完了" Click="OnCompleteClick"/>
+        <Button Content="戻る" Click="OnBackClick"/>
+    </StackPanel>
+</Page>

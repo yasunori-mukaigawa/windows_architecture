@@ -1,0 +1,16 @@
+<Page
+    x:Class="IdIdentifyApp.Feature.Check.Ui.Views.CheckPage1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel Spacing="12" Padding="24">
+        <TextBlock Text="{Binding State.Title, Mode=OneWay}" FontSize="28" />
+        <TextBlock Text="{Binding State.StatusMessage, Mode=OneWay}" FontSize="18" />
+        <TextBlock Text="{Binding State.LoadedMessage, Mode=OneWay}" FontSize="18" />
+        <TextBlock Text="{Binding State.Counter, Mode=OneWay}" FontSize="18" />
+
+        <Button Content="状態変更" Click="OnChangeStateClick" />
+        <Button Content="UseCaseから取得" Click="OnLoadClick" />
+        <Button Content="Page2へ遷移" Click="OnNavigateClick" />
+    </StackPanel>
+</Page>
