@@ -2,6 +2,7 @@
 using IdIdentifyApp.Feature.Check.Ui.Intents;
 using IdIdentifyApp.Feature.Check.Ui.Messages;
 using IdIdentifyApp.Feature.Check.Ui.UiStates;
+using IdIdentifyApp.Common.Domain.Errors;
 using IdIdentifyApp.Common.Ui.Mvi;
 using IdIdentifyApp.Common.Ui.ViewModels;
 using System;
@@ -27,8 +28,6 @@ public sealed class CheckPage2ViewModel
     {
         _check2UseCases = check2UseCases;
     }
-
-
 
     /**
      * Reducer。
@@ -57,7 +56,7 @@ public sealed class CheckPage2ViewModel
                 currentState with
                 {
                     IsCompleted = true,
-                    StatusMessage = failed.ErrorMessage,
+                    StatusMessage = failed.Error.UserMessage,
                 },
 
             _ => currentState
@@ -90,24 +89,38 @@ public sealed class CheckPage2ViewModel
      * データ取得 Intent を処理する。
      *
      * UseCase を呼び出し、取得結果を Message 化して State に反映する。
+     * 失敗時は DomainError の内容を UI 向けに反映する。
      */
     private async Task HandleLoadAsync(CancellationToken cancellationToken)
     {
         Dispatch(new LoadStarted2());
 
-        try
-        {
-            var message = await _check2UseCases.GetCheck2Message.ExecuteAsync(cancellationToken);
+        var result = await _check2UseCases.GetCheck2Message.ExecuteAsync(cancellationToken);
 
-            Dispatch(new LoadSucceeded2(message));
-        }
-        catch (Exception ex)
+        if (result.IsSuccess)
         {
-            Dispatch(new LoadFailed2(ex.Message));
-
-            await PublishEffectAsync(
-                new ShowDialogEffect("取得失敗", ex.Message),
-                cancellationToken);
+            Dispatch(new LoadSucceeded2(result.Value!));
+            return;
         }
+
+        var error = result.Error!;
+
+        Dispatch(new LoadFailed2(error));
+
+        await PublishLoadErrorEffectAsync(error, cancellationToken);
+    }
+
+    /**
+     * 取得失敗時の Effect 発火を行う。
+     *
+     * Error の復旧属性に応じて、ダイアログ文言を切り替える。
+     */
+    private async Task PublishLoadErrorEffectAsync(DomainError error, CancellationToken cancellationToken)
+    {
+        var message = BuildRecoveryGuidance(error);
+
+        await PublishEffectAsync(
+            new ShowDialogEffect(error.Title, message),
+            cancellationToken);
     }
 }

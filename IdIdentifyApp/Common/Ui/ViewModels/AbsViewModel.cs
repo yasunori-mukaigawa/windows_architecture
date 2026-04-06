@@ -1,4 +1,5 @@
-﻿using IdIdentifyApp.Common.Ui.Intents;
+﻿using IdIdentifyApp.Common.Domain.Errors;
+using IdIdentifyApp.Common.Ui.Intents;
 using IdIdentifyApp.Common.Ui.Messages;
 using IdIdentifyApp.Common.Ui.Mvi;
 using IdIdentifyApp.Common.Ui.UiStates;
@@ -87,6 +88,29 @@ public abstract class AbsViewModel<TState, TMessage, TIntent> :
 
         // Intent 処理ループを基底クラスで開始する
         _ = ProcessIntentsAsync(_intentChannel.Reader, _intentLoopCts.Token);
+    }
+
+    /**
+     * 復旧属性に応じたガイダンス文言を生成する。
+     */
+    public string BuildRecoveryGuidance(DomainError error)
+    {
+        if (error.RestartRequired)
+        {
+            return $"{error.UserMessage}\nアプリを再起動してください。";
+        }
+
+        if (error.Retryable)
+        {
+            return $"{error.UserMessage}\n再試行してください。";
+        }
+
+        if (error.Skippable)
+        {
+            return $"{error.UserMessage}\n必要に応じてスキップしてください。";
+        }
+
+        return error.UserMessage;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -263,4 +287,5 @@ public abstract class AbsViewModel<TState, TMessage, TIntent> :
 
         GC.SuppressFinalize(this);
     }
+
 }

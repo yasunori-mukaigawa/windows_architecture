@@ -1,4 +1,7 @@
-﻿using IdIdentifyApp.Modules.Customer.Applications.Ports;
+﻿using IdIdentifyApp.Common.Application.Results;
+using IdIdentifyApp.Modules.Customer.Applications.Ports;
+using IdIdentifyApp.Modules.Customer.Domain.Error;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,10 +32,20 @@ public sealed class GetCustomerUseCase
     /**
      * 顧客取得処理を実行する。
      */
-    public Task<CustomerResult> ExecuteAsync(
+    public async Task<Result<CustomerResult>> ExecuteAsync(
         string customerId,
         CancellationToken cancellationToken)
     {
-        return _customerGateway.GetCustomerAsync(customerId, cancellationToken);
+        try
+        {
+            var result = await _customerGateway.GetCustomerAsync(customerId, cancellationToken);
+
+            return Result<CustomerResult>.Success(result);
+        }
+        catch (Exception ex)
+        {
+            return Result<CustomerResult>.Failure(
+                new UnexpectedSystemError(ex));
+        }
     }
 }

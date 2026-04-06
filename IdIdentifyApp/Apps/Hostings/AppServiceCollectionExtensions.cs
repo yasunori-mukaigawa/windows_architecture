@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using IdIdentifyApp.Common.Apps.Hosting;
-using IdIdentifyApp.Modules.Customer;
+﻿using IdIdentifyApp.Common.Apps.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IdIdentifyApp.Apps.Hosting;

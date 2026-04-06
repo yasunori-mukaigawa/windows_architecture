@@ -41,6 +41,8 @@ public static class ServiceCollectionExtensions
 
         // Refit
         services.AddRestFoundation();
+
+        // Provider
         services.AddProviders();
 
         return services;

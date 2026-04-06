@@ -1,4 +1,5 @@
-﻿using IdIdentifyApp.Common.Ui.Messages;
+﻿using IdIdentifyApp.Common.Domain.Errors;
+using IdIdentifyApp.Common.Ui.Messages;
 
 namespace IdIdentifyApp.Feature.Check.Ui.Messages;
 
@@ -20,4 +21,4 @@ public sealed record LoadSucceeded2(string Message) : CheckPage2Message;
 /**
  * UseCase からの取得に失敗したことを表す Message。
  */
-public sealed record LoadFailed2(string ErrorMessage) : CheckPage2Message;
+public sealed record LoadFailed2(DomainError Error) : CheckPage2Message;

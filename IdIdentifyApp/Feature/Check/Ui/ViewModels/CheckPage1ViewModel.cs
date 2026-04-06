@@ -3,6 +3,7 @@ using IdIdentifyApp.Feature.Check.Ui.Intents;
 using IdIdentifyApp.Feature.Check.Ui.Messages;
 using IdIdentifyApp.Feature.Check.Ui.UiStates;
 using IdIdentifyApp.Feature.Check.Ui.Views;
+using IdIdentifyApp.Common.Domain.Errors;
 using IdIdentifyApp.Common.Ui.Mvi;
 using IdIdentifyApp.Common.Ui.ViewModels;
 using System;
@@ -70,7 +71,7 @@ public sealed class CheckPage1ViewModel
                 currentState with
                 {
                     IsLoading = false,
-                    LoadedMessage = failed.ErrorMessage,
+                    LoadedMessage = failed.Error.UserMessage,
                     StatusMessage = "データ取得に失敗しました"
                 },
 
@@ -110,25 +111,39 @@ public sealed class CheckPage1ViewModel
      * データ取得 Intent を処理する。
      *
      * UseCase を呼び出し、取得結果を Message 化して State に反映する。
+     * 失敗時は DomainError の内容を UI 向けに反映する。
      */
     private async Task HandleLoadAsync(CancellationToken cancellationToken)
     {
         Dispatch(new LoadStarted());
 
-        try
-        {
-            var message = await _checkUseCases.GetCheckMessage.ExecuteAsync(cancellationToken);
+        var result = await _checkUseCases.GetCheckMessage.ExecuteAsync(cancellationToken);
 
-            Dispatch(new LoadSucceeded(message));
-        }
-        catch (Exception ex)
+        if (result.IsSuccess)
         {
-            Dispatch(new LoadFailed(ex.Message));
-
-            await PublishEffectAsync(
-                new ShowDialogEffect("取得失敗", ex.Message),
-                cancellationToken);
+            Dispatch(new LoadSucceeded(result.Value!));
+            return;
         }
+
+        var error = result.Error!;
+
+        Dispatch(new LoadFailed(error));
+
+        await PublishLoadErrorEffectAsync(error, cancellationToken);
+    }
+
+    /**
+     * 取得失敗時の Effect 発火を行う。
+     *
+     * Error の復旧属性に応じて、ダイアログ文言を切り替える。
+     */
+    private async Task PublishLoadErrorEffectAsync(DomainError error, CancellationToken cancellationToken)
+    {
+        var message = BuildRecoveryGuidance(error);
+
+        await PublishEffectAsync(
+            new ShowDialogEffect(error.Title, message),
+            cancellationToken);
     }
 
     /**
