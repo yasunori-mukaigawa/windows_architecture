@@ -30,36 +30,33 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
-    <PackageReference Include="Microsoft.Extensions.Http" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" />
 	<!-- MVVM / MVI -->
-	<PackageReference Include="CommunityToolkit.Mvvm" />
 
     <!-- DI / Host / Config -->
 	<PackageReference Include="Microsoft.Extensions.Hosting" />
-	<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-	<PackageReference Include="Microsoft.Extensions.Configuration" />
 	<PackageReference Include="Microsoft.Extensions.Configuration.Json" />
-	<PackageReference Include="Microsoft.Extensions.Logging" />
-	<PackageReference Include="Refit" />
-	<PackageReference Include="Refit.HttpClientFactory" />
-	<PackageReference Include="Scrutor" />
 
 	<!-- Logging -->
-	<PackageReference Include="Serilog" />
 	<PackageReference Include="Serilog.Extensions.Hosting" />
 	<PackageReference Include="Serilog.Sinks.File" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IdIdentifyApp.Applications\IdIdentifyApp.Applications.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Common\IdIdentifyApp.Common.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Domain\IdIdentifyApp.Domain.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Infrastructure\IdIdentifyApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Ui.Common\IdIdentifyApp.Ui.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Apps\Shell\ShellWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="App\Shell\ShellWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Module\OperationLog\" />
   </ItemGroup>
 
   <!--

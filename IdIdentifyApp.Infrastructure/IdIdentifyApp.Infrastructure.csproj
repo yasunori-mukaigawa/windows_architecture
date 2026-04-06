@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Refit" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+	  <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdIdentifyApp.Applications\IdIdentifyApp.Applications.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Common\IdIdentifyApp.Common.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Domain\IdIdentifyApp.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

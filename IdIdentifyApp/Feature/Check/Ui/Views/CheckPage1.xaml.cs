@@ -1,6 +1,6 @@
 using IdIdentifyApp.Feature.Check.Ui.Intents;
 using IdIdentifyApp.Feature.Check.Ui.ViewModels;
-using IdIdentifyApp.Common.Ui.Locators;
+using IdIdentifyApp.Ui.Common.Apps.Locators;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -26,11 +26,11 @@ public sealed partial class CheckPage1 : Page
         DataContext = _viewModel;
     }
 
-     /**
-     * 状態変更ボタン押下。
-     *
-     * 状態変更要求を Intent として ViewModel へ通知する。
-     */
+    /**
+    * 状態変更ボタン押下。
+    *
+    * 状態変更要求を Intent として ViewModel へ通知する。
+    */
     private async void OnChangeStateClick(object sender, RoutedEventArgs e)
     {
         await _viewModel.PublishIntentAsync(new ChangeStateClicked());

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdIdentifyApp.Common\IdIdentifyApp.Common.csproj" />
+    <ProjectReference Include="..\IdIdentifyApp.Domain\IdIdentifyApp.Domain.csproj" />
+	  <PackageReference Include="Scrutor" Version="5.0.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,10 +1,10 @@
-﻿using IdIdentifyApp.Apps.Hosting;
-using IdIdentifyApp.Common.Apps.Hosting;
-using IdIdentifyApp.Common.Apps.Shell;
+﻿using IdIdentifyApp.Applications.Module.OperationLog.Ports;
+using IdIdentifyApp.Apps.Hostings;
+using IdIdentifyApp.Apps.Locators;
+using IdIdentifyApp.Apps.Shell;
 using IdIdentifyApp.Common.Infrastructure.Db;
-using IdIdentifyApp.Modules.OperationLog.Application.Ports;
-using IdIdentifyApp.Modules.OperationLog.Domain.Entities;
-using IdIdentifyApp.Modules.OperationLog.Infrastructure.Repositories;
+using IdIdentifyApp.Domain.Module.OperationLog.Entity;
+using IdIdentifyApp.Ui.Common.Apps.Locators;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
@@ -85,6 +85,8 @@ public partial class App : Application
                 services.AddAppServices();
             })
             .Build();
+
+        ViewModelLocator.Initialize(new ServiceProviderViewModelResolver(Services));
     }
 
     /**
@@ -102,6 +104,7 @@ public partial class App : Application
 
         // Host を起動し、登録済みサービスを利用可能にする
         await _host.StartAsync();
+
 
         // DI コンテナから ShellWindow を取得
         _mainWindow = Services.GetRequiredService<ShellWindow>();

@@ -1,11 +1,11 @@
-﻿using IdIdentifyApp.Feature.Check.Applications.UseCases;
+﻿using IdIdentifyApp.Applications.Feature.Check.UseCases;
+using IdIdentifyApp.Common.Domain.Error;
+using IdIdentifyApp.Common.Ui.Mvi;
+using IdIdentifyApp.Common.Ui.ViewModels;
 using IdIdentifyApp.Feature.Check.Ui.Intents;
 using IdIdentifyApp.Feature.Check.Ui.Messages;
 using IdIdentifyApp.Feature.Check.Ui.UiStates;
 using IdIdentifyApp.Feature.Check.Ui.Views;
-using IdIdentifyApp.Common.Domain.Errors;
-using IdIdentifyApp.Common.Ui.Mvi;
-using IdIdentifyApp.Common.Ui.ViewModels;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace IdIdentifyApp.Feature.Check.Ui.ViewModels;
 
 /**
- * CheckPage1 用の ViewModel。
+ * CheckPage1 用の Vieodel。
  *
  * 本 ViewModel は以下の確認を目的とする。
  * ・State 更新に応じて UI 表示が変わること

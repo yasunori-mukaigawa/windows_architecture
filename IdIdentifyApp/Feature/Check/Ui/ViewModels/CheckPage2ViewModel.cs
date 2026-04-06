@@ -1,10 +1,10 @@
-﻿using IdIdentifyApp.Feature.Check.Applications.UseCases;
+﻿using IdIdentifyApp.Applications.Feature.Check.UseCases;
+using IdIdentifyApp.Common.Domain.Error;
+using IdIdentifyApp.Common.Ui.Mvi;
+using IdIdentifyApp.Common.Ui.ViewModels;
 using IdIdentifyApp.Feature.Check.Ui.Intents;
 using IdIdentifyApp.Feature.Check.Ui.Messages;
 using IdIdentifyApp.Feature.Check.Ui.UiStates;
-using IdIdentifyApp.Common.Domain.Errors;
-using IdIdentifyApp.Common.Ui.Mvi;
-using IdIdentifyApp.Common.Ui.ViewModels;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

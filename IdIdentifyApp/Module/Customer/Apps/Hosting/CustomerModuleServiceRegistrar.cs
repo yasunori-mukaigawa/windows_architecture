@@ -1,9 +1,9 @@
 ﻿using IdIdentifyApp.Common.Apps.Hosting;
-using IdIdentifyApp.Common.Infrastructure.Rest;
-using IdIdentifyApp.Modules.Customer.Infrastructure.Api;
+using IdIdentifyApp.Infrastructure.Apps.Hosting;
+using IdIdentifyApp.Infrastructure.Module.Customer.Api;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IdIdentifyApp.Modules.Customer.Apps.Hosting;
+namespace IdIdentifyApp.Module.Customer.Apps.Hosting;
 
 /**
  * Customer モジュールサービス登録クラス。

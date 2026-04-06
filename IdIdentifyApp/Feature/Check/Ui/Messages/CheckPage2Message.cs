@@ -1,4 +1,4 @@
-﻿using IdIdentifyApp.Common.Domain.Errors;
+﻿using IdIdentifyApp.Common.Domain.Error;
 using IdIdentifyApp.Common.Ui.Messages;
 
 namespace IdIdentifyApp.Feature.Check.Ui.Messages;

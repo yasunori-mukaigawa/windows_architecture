@@ -1,6 +1,6 @@
 using IdIdentifyApp.Feature.Check.Ui.Intents;
 using IdIdentifyApp.Feature.Check.Ui.ViewModels;
-using IdIdentifyApp.Common.Ui.Locators;
+using IdIdentifyApp.Ui.Common.Apps.Locators;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Threading;

@@ -1,7 +1,8 @@
 ﻿using IdIdentifyApp.Common.Apps.Hosting;
+using IdIdentifyApp.Ui.Common.Apps.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IdIdentifyApp.Apps.Hosting;
+namespace IdIdentifyApp.Apps.Hostings;
 
 /**
  * アプリケーション全体サービス登録拡張。

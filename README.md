@@ -1,1 +1,1 @@
-# windows_architecture
+# カスタマイズ設計書を読むべし
