@@ -1,10 +1,11 @@
-﻿using IdIdentifyApp.Applications.Feature.Check.UseCases;
+﻿using IdIdentifyApp.Applications.Feature.Check.Intents;
+using IdIdentifyApp.Applications.Feature.Check.Messages;
+using IdIdentifyApp.Applications.Feature.Check.Reducers;
+using IdIdentifyApp.Applications.Feature.Check.UiStates;
+using IdIdentifyApp.Applications.Feature.Check.UseCases;
 using IdIdentifyApp.Common.Domain.Error;
 using IdIdentifyApp.Common.Ui.Mvi;
 using IdIdentifyApp.Common.Ui.ViewModels;
-using IdIdentifyApp.Feature.Check.Ui.Intents;
-using IdIdentifyApp.Feature.Check.Ui.Messages;
-using IdIdentifyApp.Feature.Check.Ui.UiStates;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,11 +23,13 @@ public sealed class CheckPage2ViewModel
     : AbsViewModel<CheckPage2State, CheckPage2Message, CheckPage2Intent>
 {
     private readonly Check2UseCases _check2UseCases;
+    private readonly CheckPage2Reducer _checkPage2Reducer;
 
-    public CheckPage2ViewModel(Check2UseCases check2UseCases)
+    public CheckPage2ViewModel(Check2UseCases check2UseCases, CheckPage2Reducer checkPage2Reducer)
         : base(CheckPage2State.Initial)
     {
         _check2UseCases = check2UseCases;
+        _checkPage2Reducer = checkPage2Reducer;
     }
 
     /**
@@ -36,31 +39,7 @@ public sealed class CheckPage2ViewModel
      */
     protected override CheckPage2State Reduce(CheckPage2State currentState, CheckPage2Message message)
     {
-        return message switch
-        {
-            LoadStarted2 =>
-                currentState with
-                {
-                    IsCompleted = false,
-                    StatusMessage = "データ取得中です"
-                },
-
-            LoadSucceeded2 succeeded =>
-                currentState with
-                {
-                    IsCompleted = true,
-                    StatusMessage = succeeded.Message,
-                },
-
-            LoadFailed2 failed =>
-                currentState with
-                {
-                    IsCompleted = true,
-                    StatusMessage = failed.Error.UserMessage,
-                },
-
-            _ => currentState
-        };
+        return _checkPage2Reducer.Reduce(currentState, message);
     }
 
     /**

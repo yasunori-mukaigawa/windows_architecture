@@ -1,7 +1,6 @@
 using IdIdentifyApp.Applications.Feature.Check.Ports;
 using IdIdentifyApp.Applications.Feature.Check.UseCases;
 
-
 namespace IdIdentifyApp.Tests
 {
     public class GetCheckMessage2UseCaseTests

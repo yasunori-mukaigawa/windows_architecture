@@ -1,10 +1,11 @@
-﻿using IdIdentifyApp.Applications.Feature.Check.UseCases;
+﻿using IdIdentifyApp.Applications.Feature.Check.Intents;
+using IdIdentifyApp.Applications.Feature.Check.Messages;
+using IdIdentifyApp.Applications.Feature.Check.Reducers;
+using IdIdentifyApp.Applications.Feature.Check.UiStates;
+using IdIdentifyApp.Applications.Feature.Check.UseCases;
 using IdIdentifyApp.Common.Domain.Error;
 using IdIdentifyApp.Common.Ui.Mvi;
 using IdIdentifyApp.Common.Ui.ViewModels;
-using IdIdentifyApp.Feature.Check.Ui.Intents;
-using IdIdentifyApp.Feature.Check.Ui.Messages;
-using IdIdentifyApp.Feature.Check.Ui.UiStates;
 using IdIdentifyApp.Feature.Check.Ui.Views;
 using System;
 using System.Threading;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace IdIdentifyApp.Feature.Check.Ui.ViewModels;
 
 /**
- * CheckPage1 用の Vieodel。
+ * CheckPage1 用の ViewModel。
  *
  * 本 ViewModel は以下の確認を目的とする。
  * ・State 更新に応じて UI 表示が変わること
@@ -28,11 +29,13 @@ public sealed class CheckPage1ViewModel
     : AbsViewModel<CheckPage1State, CheckPage1Message, CheckPage1Intent>
 {
     private readonly CheckUseCases _checkUseCases;
+    private readonly CheckPage1Reducer _checkPage1Reducer;
 
-    public CheckPage1ViewModel(CheckUseCases checkUseCases)
+    public CheckPage1ViewModel(CheckUseCases checkUseCases, CheckPage1Reducer checkPage1Reducer)
         : base(CheckPage1State.Initial)
     {
         _checkUseCases = checkUseCases;
+        _checkPage1Reducer = checkPage1Reducer;
     }
 
     /**
@@ -42,41 +45,7 @@ public sealed class CheckPage1ViewModel
      */
     protected override CheckPage1State Reduce(CheckPage1State currentState, CheckPage1Message message)
     {
-        return message switch
-        {
-            ChangeStateRequested =>
-                currentState with
-                {
-                    StatusMessage = $"状態が更新されました（{currentState.Counter + 1}回目）",
-                    Counter = currentState.Counter + 1,
-                    CanNavigate = true
-                },
-
-            LoadStarted =>
-                currentState with
-                {
-                    IsLoading = true,
-                    StatusMessage = "データ取得中です"
-                },
-
-            LoadSucceeded succeeded =>
-                currentState with
-                {
-                    IsLoading = false,
-                    LoadedMessage = succeeded.Message,
-                    StatusMessage = "データ取得に成功しました"
-                },
-
-            LoadFailed failed =>
-                currentState with
-                {
-                    IsLoading = false,
-                    LoadedMessage = failed.Error.UserMessage,
-                    StatusMessage = "データ取得に失敗しました"
-                },
-
-            _ => currentState
-        };
+        return _checkPage1Reducer.Reduce(currentState, message);
     }
 
     /**

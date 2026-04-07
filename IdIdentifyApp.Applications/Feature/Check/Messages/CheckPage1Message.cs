@@ -1,7 +1,7 @@
 ﻿using IdIdentifyApp.Common.Domain.Error;
 using IdIdentifyApp.Common.Ui.Messages;
 
-namespace IdIdentifyApp.Feature.Check.Ui.Messages;
+namespace IdIdentifyApp.Applications.Feature.Check.Messages;
 
 /**
  * CheckPage1 で扱う Message の基底型。

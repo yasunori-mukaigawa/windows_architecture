@@ -1,6 +1,6 @@
 ﻿using IdIdentifyApp.Common.Ui.Intents;
 
-namespace IdIdentifyApp.Feature.Check.Ui.Intents;
+namespace IdIdentifyApp.Applications.Feature.Check.Intents;
 
 /**
  * CheckPage1 で発生する View 起点イベントの基底型。

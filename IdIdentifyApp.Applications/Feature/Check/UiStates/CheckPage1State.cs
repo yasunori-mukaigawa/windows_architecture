@@ -1,6 +1,6 @@
 ﻿using IdIdentifyApp.Common.Ui.UiStates;
 
-namespace IdIdentifyApp.Feature.Check.Ui.UiStates;
+namespace IdIdentifyApp.Applications.Feature.Check.UiStates;
 
 /**
  * CheckPage1 の画面状態を表す。

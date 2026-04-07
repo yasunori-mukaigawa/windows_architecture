@@ -1,4 +1,5 @@
 ﻿
+using IdIdentifyApp.Applications.Apps.Hosting;
 using IdIdentifyApp.Apps.Hostings;
 using IdIdentifyApp.Infrastructure.Apps.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,9 @@ public static class ServiceCollectionExtensions
 
         // UseCase
         services.AddUseCases();
+
+        // Reducer
+        services.AddReducers();
 
         // ViewModel
         services.AddViewModels();

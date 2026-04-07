@@ -1,4 +1,4 @@
-using IdIdentifyApp.Feature.Check.Ui.Intents;
+using IdIdentifyApp.Applications.Feature.Check.Intents;
 using IdIdentifyApp.Feature.Check.Ui.ViewModels;
 using IdIdentifyApp.Ui.Common.Apps.Locators;
 using Microsoft.UI.Xaml;
